@@ -4,8 +4,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
 
+<h2>Create</h2>
 <h4>Credit</h4>
 <hr />
 <div class="row">
@@ -21,28 +21,63 @@
 
             <div class="form-group">
                 <label asp-for="Amount" class="control-label"></label>
-                <input asp-for="Amount" class="form-control" />
+                <input asp-for="Amount" class="form-control" id="monto" min="0"/>
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CreditTypes"></label>
-                <select asp-for="CreditTypeId" asp-items="@Model.CreditTypes" class="form-control">
+                <select asp-for="CreditTypeId" asp-items="@Model.CreditTypes" class="form-control" id="CreditTypeDd">
                     <option value="">Credit Type</option>
                 </select>
                 @* <span asp-validation-for="CreditTypeId" class="text-danger"></span>*@
             </div>
 
             <div class="form-group">
-                <label asp-for="MonthTerm" class="control-label"></label>
-                <input asp-for="MonthTerm" class="form-control" readonly/>
+                <label asp-for="MonthTerm" class="control-label">Term: <label id="plazo"></label></label>
                 <span asp-validation-for="MonthTerm" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Interest" class="control-label"></label>
-                <input asp-for="Interest" class="form-control" readonly />
+                <label asp-for="Interest" class="control-label"> Interest: <label id="interes"></label></label>
                 <span asp-validation-for="Interest" class="text-danger"></span>
             </div>
+
+            <!-- Form actions -->
+            <div class="form-group">
+                <button type="button" class="btn btn-default" id="idCalcular" onclick="calcularPlan()">Calculate</button>
+            </div>
+
+            <!--TABLE DE PAGOS-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="well well-sm">
+
+                            <fieldset>
+                                <legend class="text-center">Payment Plan</legend>
+
+                                <table class="table table-bordered" id="tablaPagos">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Month</th>
+                                            <th scope="col">Initial Balance</th>
+                                            <th scope="col">Amortization</th>
+                                            <th scope="col">Interest</th>
+                                            <th scope="col">Monthly Fee</th>
+                                            <th scope="col">Final Balance</th>
+                                        </tr>
+                                    </thead>
+
+                                </table>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -55,6 +90,23 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+
+
 @section Scripts {
+    <script src="~/lib/jquery/jquery-3.3.1.js"></script>
+    <script src="~/js/Credit.js"></script>
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        var model = @Html.Raw(Json.Serialize(Model.CreditTypesObject));
+
+        $("#CreditTypeDd").on("change", function () {
+            var id = $("#CreditTypeDd").children("option:selected").val();
+            var term = $(model[id-1].monthTerm);
+            var inte = $(model[id-1].interest);
+            $("#plazo").text(term[0]);
+            $("#interes").text(inte[0]+"%");
+    });
+    </script>
 }

@@ -15,7 +15,7 @@
             <input type="hidden" asp-for="CreditId" />
             <div class="form-group">
                 <label asp-for="State" class="control-label"></label>
-                <input asp-for="State" class="form-control" />
+                <input asp-for="State" class="form-control" min="1" max="3"/>
                 <span asp-validation-for="State" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -27,12 +27,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Purpose" class="control-label"></label>
-                <input asp-for="Purpose" class="form-control" />
+                <input asp-for="Purpose" class="form-control" readonly/>
                 <span asp-validation-for="Purpose" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Amount" class="control-label"></label>
-                <input asp-for="Amount" class="form-control" />
+                <input asp-for="Amount" class="form-control" readonly/>
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
             <div class="form-group">

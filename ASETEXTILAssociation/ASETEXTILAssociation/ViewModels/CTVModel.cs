@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using ASETEXTILAssociation.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace ASETEXTILAssociation.ViewModels
         public string Name { get; set; }
         public int MonthTerm { get; set; }
         public int Interest { get; set; }
+        public IEnumerable<CreditType> CreditTypesObject { get; set; }
         public IEnumerable<SelectListItem> CreditTypes { get; set; }
         
     }

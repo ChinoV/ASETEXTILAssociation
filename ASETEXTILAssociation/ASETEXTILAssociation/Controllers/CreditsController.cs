@@ -50,6 +50,7 @@ namespace ASETEXTILAssociation.Controllers
             {
                 return View(new CTVModel()
                 {
+                    CreditTypesObject = _context.CreditType.ToList(),
                     CreditTypes = _context.CreditType.Select(u => new SelectListItem()
                     {
                         Value = u.CreditTypeId.ToString(),

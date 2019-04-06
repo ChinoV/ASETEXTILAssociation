@@ -1,8 +1,9 @@
 ﻿function calcularPlan() {
     var contenido = '<tbody>';
-    var tasaInteres = $('#interes').val() / 100;
+    var tasaInteres = $('#interes').text().slice(0, -1) / 100;
+    console.log(tasaInteres);
     var montoPrestamo = $('#monto').val();
-    var duracionP = $('#plazo').val();
+    var duracionP = $('#plazo').text();
     //var cuotaMes = ( (tasaInteres * montoPrestamo) / ( 1 - ( Math.pow( ( 1 / ( 1 + tasaInteres ), duracionP ) ) ) ) );
     var cuotaArriba = tasaInteres * montoPrestamo;
     var negativo = 1 / Math.pow(1 + tasaInteres, duracionP);
@@ -38,3 +39,5 @@
     contenido += '</tbody>';
     $('#tablaPagos').append(contenido);
 }
+
+
