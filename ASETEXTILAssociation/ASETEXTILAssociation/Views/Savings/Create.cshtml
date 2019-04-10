@@ -1,0 +1,65 @@
+﻿@model ASETEXTILAssociation.ViewModels.SavingsViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Saving</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" min="0"/>
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <div class="form-group">
+                    <label asp-for="SavingTypes"></label>
+                    <select asp-for="SavingTypeId" asp-items="@Model.SavingTypes" class="form-control" id="SavingTypeDd" required>
+                        <option value="">Saving Type</option>
+                    </select>
+                    @* <span asp-validation-for="SavingTypeId" class="text-danger"></span>*@
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="MonthTerm" class="control-label">Term: <label id="plazo"></label></label>
+                    <span asp-validation-for="MonthTerm" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Interest" class="control-label"> Interest: <label id="interes"></label></label>
+                    <span asp-validation-for="Interest" class="text-danger"></span>
+                </div>
+
+
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        var model = @Html.Raw(Json.Serialize(Model.SavingTypesObject));
+
+        $("#SavingTypeDd").on("change", function () {
+            var id = $("#SavingTypeDd").children("option:selected").val();
+            var term = $(model[id-1].monthTerm);
+            var inte = $(model[id-1].interest);
+            $("#plazo").text(term[0]);
+            $("#interes").text(inte[0]+"%");
+    });
+    </script>
+}

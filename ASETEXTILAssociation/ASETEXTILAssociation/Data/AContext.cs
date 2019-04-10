@@ -15,6 +15,8 @@ namespace ASETEXTILAssociation.Data
 
         public DbSet<Credit> Credits { get; set; }
         public DbSet<CreditType> CreditType { get; set; }
+        public DbSet<Saving> Savings { get; set; }
+        public DbSet<SavingType> SavingType { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
         public DbSet<Affiliate> Affiliates { get; set; }
