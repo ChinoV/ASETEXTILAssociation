@@ -21,8 +21,7 @@ namespace ASETEXTILAssociation.Models
         public double NetSalary { get; set; }
 
         public virtual ICollection<Credit> Credits { get; set; }
-        public UserType UserType { get; set; }
-        public PaymentPlan PaymentPlan { get; set; } 
+        public virtual UserType UserType { get; set; }
 
     }
 }

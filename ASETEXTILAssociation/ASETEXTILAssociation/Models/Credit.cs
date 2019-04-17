@@ -20,6 +20,5 @@ namespace ASETEXTILAssociation.Models
 
         public CreditType Type { get; set; }
         public Affiliate Affiliate { get; set; }
-        public PaymentPlan PaymentPlan { get; set; }
     }
 }
